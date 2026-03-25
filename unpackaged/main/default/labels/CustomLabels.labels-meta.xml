@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Cathy_Condor_User_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cathy Condor User Id</shortDescription>
+        <value>0056A000001roKHQAY</value>
+    </labels>
+    <labels>
+        <fullName>Hot_Account_Meeting_Completed_Custom_Notif</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hot Account Meeting Completed Custom Notif</shortDescription>
+        <value>0MLca0000000qt3GAA</value>
+    </labels>
+    <labels>
+        <fullName>Hot_Account_Requested</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hot Account Requested</shortDescription>
+        <value>0MLca0000000r17GAA</value>
+    </labels>
+    <labels>
+        <fullName>Kim_Pontius_User_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Kim Pontius User Id</shortDescription>
+        <value>0056A000000NbwtQAC</value>
+    </labels>
+</CustomLabels>

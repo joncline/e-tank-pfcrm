@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Hot_Account_Requested_Email</name>
+        <label>Send Hot Account Requested Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>Account.Account_Send_Notification_for_Hot_Requested</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Account.Account_Send_Notification_for_Hot_Requested</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <formulas>
+        <name>formNotifbody</name>
+        <dataType>String</dataType>
+        <expression>&quot;A new Hot Account Request has been logged in Salesforce. Please review and click the link below to Approve.&quot;
+&amp; BR() &amp;
+&quot;Account Name: &quot; &amp; {!$Record.Name} &amp; BR() &amp;
+&quot;Hot Request User: &quot; &amp; {!$Record.Hot_Account_Requested_User__c} &amp; BR() &amp;
+&quot;Hot Request Reason: &quot; &amp; {!$Record.Hot_Account_Requested_Reason__c} &amp; BR() &amp;
+&quot;Link to Approve Hot Account: https://etank.my.salesforce.com/apex/HotAccountApprove?id=&quot; &amp; {!$Record.Id}</expression>
+    </formulas>
+    <interviewLabel>Account - On Create/ Update - Set Hot Requested Date and User {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account - On Create/ Update - Set Hot Requested Date and User</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Set_Hot_Account_Requested_Date_and_User</name>
+        <label>Set Hot Account Requested Date and User</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Hot_Account_Requested_Email</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Hot_Account_Requested_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Hot_Account_Requested_User__c</field>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Hot_Account_Requested_Date_and_User</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Hot_Account_Requested__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>colUserId</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
